@@ -1,0 +1,4 @@
+C:\Users\이강준\Desktop\SY ET\C#\TeamProject\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\이강준\Desktop\SY ET\C#\TeamProject\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.AssemblyInfoInputs.cache
+C:\Users\이강준\Desktop\SY ET\C#\TeamProject\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.AssemblyInfo.cs
+C:\Users\이강준\Desktop\SY ET\C#\TeamProject\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.csproj.CoreCompileInputs.cache
