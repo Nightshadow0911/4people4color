@@ -8,6 +8,7 @@ namespace team
         private static Item[] inventory;
         private static int ItemCount;
         private static int potionCount;
+        private static List<Monster> monsters = new List<Monster>();
 
         static void Main(string[] args)
         {
@@ -115,10 +116,11 @@ namespace team
             Console.WriteLine();
             Console.WriteLine("1. 상태보기");
             Console.WriteLine("2. 인벤토리");
+            Console.WriteLine("3. 던전 입장");                          // 추가
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-            int input = CheckValidInput(1, 2);
+            int input = CheckValidInput(1, 3);
             switch (input)
             {
                 case 1:
@@ -127,6 +129,9 @@ namespace team
 
                 case 2:
                     DisplayInventory();
+                    break;
+                case 3:                                                 //추가
+                    DisplayDungeon();
                     break;
             }
         }
@@ -314,6 +319,75 @@ namespace team
 
 
         }
+
+
+        // 던전 화면 추가
+        static void DisplayDungeon()
+        {
+            Console.Clear();
+            Random random = new Random();
+
+            if (monsters.Count > 0)
+            {
+                int numMonsters = random.Next(1, 5); // 1~4마리 랜덤으로 설정
+
+                Console.WriteLine();
+                Console.WriteLine("                 !!!");
+                Console.WriteLine($"던전 안에서 총 {numMonsters}마리의 몬스터가 나타났습니다!\n");
+
+                List<Monster> encounteredMonsters = new List<Monster>(); // 랜덤으로 뽑힌 몬스터들을 저장할 리스트
+
+                for (int i = 0; i < numMonsters; i++)
+                {
+                    int randomIndex = random.Next(monsters.Count);      // 몬스터 리스트 중에 랜덤으로 뽑기
+                    Monster encounteredMonster = monsters[randomIndex];     // 몬스터 정보 넣기
+                    encounteredMonsters.Add(encounteredMonster); // 랜덤으로 뽑힌 몬스터를 리스트에 추가
+
+                    Console.WriteLine($"{i + 1}. LV{encounteredMonster.Level}. {encounteredMonster.Name} (공격력: {encounteredMonster.Atk}, HP: {encounteredMonster.Hp})");
+
+                }
+
+                // 게임 전투 구현
+
+
+                Console.WriteLine();
+                Console.WriteLine("공격할 대상을 입력해주세요!!");
+                Console.Write(" :   ");
+
+
+                int input = CheckValidInput(1, numMonsters);
+                Monster targetMonster = encounteredMonsters[input - 1]; // 선택한 몬스터
+
+                Console.WriteLine();
+                Console.WriteLine($"{targetMonster.Name}을(를) 공격합니다!");
+                Console.WriteLine();
+
+                //switch (input)
+                //{
+                //    case 1:
+                //        // 몬스터 1  선택
+                //        break;
+
+                //    case 2:
+                //        // 몬스터 2  선택
+                //        break;
+                //    case 3:
+                //        // 몬스터 3  선택
+                //        break;
+                //    case 4:
+                //        // 몬스터 4  선택
+                //        break;
+                //}
+
+            }
+            else
+            {
+                Console.WriteLine("던전에 몬스터가 없습니다!");
+                Console.ReadKey();
+                DisplayGameIntro();
+            }
+
+        }
         #endregion
 
         #region Utility
@@ -410,7 +484,36 @@ namespace team
             }
 
         }
+
+        public class Monster
+        {
+            // 몬스터 종류 List
+            public int Number { get; set; }
+            public string Name { get; }
+            public int Level { get; }
+            public int Atk { get; }
+            public int Hp { get; }
+
+            // monster 죽일 시, 골드 및 경험치
+            // public int Gold { get; }
+            // public int exp { get; }
+
+            // monster>player 공격력 miss 처리
+            // public int Def { get; }
+
+            public Monster(string name, int level, int atk, int hp)
+            {
+                Name = name;
+                Level = level;
+                Atk = atk;
+                Hp = hp;
+
+            }
+        }
+
+
     }
+
 
     #endregion
 }   
