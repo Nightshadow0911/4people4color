@@ -1,10 +1,13 @@
-﻿namespace team
+﻿using System.Numerics;
+
+namespace team
 {
     internal class Program
     {
         private static Character player;
         private static Item[] inventory;
         private static int ItemCount;
+        private static int potionCount;
 
         static void Main(string[] args)
         {
@@ -25,6 +28,9 @@
             // 아이템 추가
             AddItem(new Item("무쇠갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 0, 5));
             AddItem(new Item("낡은 검", "쉽게 볼 수 있는 낡은 검입니다.", 2, 0));
+
+            // 포션 갯수 추가
+            potionCount = 3;
         }
 
         #endregion
@@ -253,6 +259,46 @@
             }
         }
 
+        static void DisplayPotion()
+        {
+            Console.Clear();
+            DisplayTitle("회복");
+            Console.WriteLine("포션을 사용하면 체력을 30 회복 할 수 있습니다. (남은 포션: " + potionCount + ")");
+            Console.WriteLine();
+            Console.WriteLine("1. 사용하기");
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+
+            int input = CheckValidInput(0, 1);
+            switch (input)
+            {
+                // 체력회복이 된 이후에 다시 DisplayPotion 으로 나갈 수 있도록 구현해야함.
+
+                case 1:
+                    if (potionCount > 0)
+                    {
+                        HealthPotion test = new HealthPotion();
+                        test.Use(player);
+                        Console.WriteLine("체력이 30 회복되었습니다.");
+                        Console.WriteLine("현재 체력: " + player.Hp);
+                        potionCount--;
+                    }
+
+                    else
+                    {
+                        Console.WriteLine("포션이 부족합니다.");
+                    }
+                    break;
+
+
+                case 0:
+                    DisplayGameIntro();
+                    break;
+            }
+
+
+        }
         #endregion
 
         #region Utility
@@ -289,54 +335,67 @@
         }
 
         #endregion
-    }
 
 
-    #region 데이터
 
-    public class Character
-    {
-        public string Name { get; }
-        public string Job { get; }
-        public int Level { get; }
-        public int Atk { get; }
-        public int Def { get; }
-        public int Hp { get; }
-        public int Gold { get; }
+        #region 데이터
 
-        public Character(string name, string job, int level, int atk, int def, int hp, int gold)
+        public class HealthPotion
         {
-            Name = name;
-            Job = job;
-            Level = level;
-            Atk = atk;
-            Def = def;
-            Hp = hp;
-            Gold = gold;
-        }
-    }
+            public string Name => "체력포션";
 
-    public class Item
-    {
-        public string Name { get; }
-        public string Description { get; }
-
-        public int Atk { get; }
-        public int Def { get; }
-
-        public bool IsEquiped { get; set; }
-
-        public Item(string name, string description, int atk, int def)
-        {
-            Name = name;
-            Description = description;
-            Atk = atk;
-            Def = def;
-
-            IsEquiped = false;
+            public void Use(Character healing)
+            {
+                Console.WriteLine("체력 포션을 사용합니다. 체력이 30 증가합니다.");
+                healing.Hp += 30;
+                if (player.Hp > 100) healing.Hp = 100;
+            }
         }
 
+        public class Character
+        {
+            public string Name { get; }
+            public string Job { get; }
+            public int Level { get; }
+            public int Atk { get; }
+            public int Def { get; }
+            public int Hp { get; set; }
+            public int Gold { get; }
+
+            public Character(string name, string job, int level, int atk, int def, int hp, int gold)
+            {
+                Name = name;
+                Job = job;
+                Level = level;
+                Atk = atk;
+                Def = def;
+                Hp = hp;
+                Gold = gold;
+            }
+        }
+
+        public class Item
+        {
+            public string Name { get; }
+            public string Description { get; }
+
+            public int Atk { get; }
+            public int Def { get; }
+
+            public bool IsEquiped { get; set; }
+
+            public Item(string name, string description, int atk, int def)
+            {
+                Name = name;
+                Description = description;
+                Atk = atk;
+                Def = def;
+
+                IsEquiped = false;
+            }
+
+        }
     }
 
     #endregion
-}
+}   
