@@ -31,6 +31,21 @@ namespace team
 
             // 포션 갯수 추가
             potionCount = 3;
+
+            // 몬스터 리스트
+            // List<Monster> 
+            monsters = new List<Monster>
+            {
+                new Monster("칼날부리", 1, 2, 30),
+                new Monster("돌골렘", 1, 2, 20),
+                new Monster("늑대", 1, 5, 20),
+                new Monster("미니언", 1, 3, 20)
+            };
+            // 번호 부여
+            for (int i = 0; i < monsters.Count; i++)
+            {
+                monsters[i].Number = i + 1;
+            }
         }
 
         #endregion
