@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 namespace team
 {
@@ -20,8 +21,55 @@ namespace team
 
         static void GameDataSetting()
         {
-            // 캐릭터 정보 세팅
-            player = new Character("Chad", "전사", 1, 10, 5, 100, 1500);
+            Console.WriteLine("게임을 시작합니다.");
+            Console.Write("캐릭터 이름을 입력하세요: ");
+            string name = Console.ReadLine();
+
+            Console.WriteLine("직업을 선택하세요.");
+            Console.WriteLine("1.전사 2.마법사 3.궁수 4.도적");
+
+            string job = "없음";
+            int jobchoose = CheckValidInput(1, 4);
+            switch (jobchoose)
+            {
+                case 1:
+                    job = "전사";
+                    break;
+
+                case 2:
+                    job = "마법사";
+                    break;
+
+                case 3:
+                    job = "궁수";
+                    break;
+
+                case 4:
+                    job = "도적";
+                    break;
+            }
+
+            Console.WriteLine("스탯을 결정해야 합니다.");  //직업에 따라 스탯에 차별을 줄 예정, MP, 회피, 치명타 등 스탯 추가 예정.
+            Console.WriteLine("Enter키를 눌러 주사위를 굴려서 스탯을 정해주세요.");
+            Console.ReadLine();
+
+            bool reroll = true;
+            while (reroll)
+            {
+                Console.WriteLine("주사위를 굴립니다.");
+                Random random = new Random();
+                int Atk = random.Next(5, 15);
+                int Def = random.Next(3, 8);
+                int Hp = random.Next(80, 120);
+
+                Console.WriteLine($"공격력: {Atk} | 방어력: {Def} | 체력: {Hp}");
+
+                Console.Write("주사위를 다시 굴리려면 Y를 입력하세요. 다음으로 넘어가려면 다른 키를 입력하세요: ");
+                reroll = Console.ReadLine().ToUpper() == "Y";
+
+                // 캐릭터 정보 세팅
+                player = new Character(name, job, 1, Atk, Def, Hp, 1500);
+            }
 
             // 인벤토리 생성
             inventory = new Item[10];
@@ -41,7 +89,7 @@ namespace team
                 new Monster("돌골렘", 1, 2, 20),
                 new Monster("늑대", 1, 5, 20),
                 new Monster("미니언", 1, 3, 20)
-            };
+            }
             // 번호 부여
             for (int i = 0; i < monsters.Count; i++)
             {
@@ -112,11 +160,12 @@ namespace team
             Console.Clear();
 
             Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
-            Console.WriteLine("이곳에서 전전으로 들어가기 전 활동을 할 수 있습니다.");
+            Console.WriteLine("이곳에서 던전으로 들어가기 전 활동을 할 수 있습니다.");
             Console.WriteLine();
             Console.WriteLine("1. 상태보기");
             Console.WriteLine("2. 인벤토리");
             Console.WriteLine("3. 던전 입장");                          // 추가
+            Console.WriteLine("4. 회복 아이템")
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
@@ -130,8 +179,13 @@ namespace team
                 case 2:
                     DisplayInventory();
                     break;
+
                 case 3:                                                 //추가
                     DisplayDungeon();
+                    break;
+
+                case 4:
+                    DisplayPotion();
                     break;
             }
         }
