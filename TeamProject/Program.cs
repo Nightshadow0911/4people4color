@@ -89,7 +89,7 @@ namespace team
                 new Monster("돌골렘", 1, 2, 20),
                 new Monster("늑대", 1, 5, 20),
                 new Monster("미니언", 1, 3, 20)
-            }
+            };
             // 번호 부여
             for (int i = 0; i < monsters.Count; i++)
             {
@@ -165,7 +165,7 @@ namespace team
             Console.WriteLine("1. 상태보기");
             Console.WriteLine("2. 인벤토리");
             Console.WriteLine("3. 던전 입장");                          // 추가
-            Console.WriteLine("4. 회복 아이템")
+            Console.WriteLine("4. 회복 아이템");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
@@ -345,30 +345,49 @@ namespace team
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
             int input = CheckValidInput(0, 1);
-            switch (input)
+
+            if (input == 0)
             {
-                // 체력회복이 된 이후에 다시 DisplayPotion 으로 나갈 수 있도록 구현해야함.
+                DisplayGameIntro();
+            }
 
-                case 1:
-                    if (potionCount > 0)
+            if (input == 1)
+            {
+                if (potionCount > 0)
+                {
+                    HealthPotion test = new HealthPotion();
+                    test.Use(player);
+                    Console.WriteLine("체력이 30 회복되었습니다.");
+                    Console.WriteLine("현재 체력: " + player.Hp);
+                    potionCount--;
+                    Console.WriteLine();
+                    Console.WriteLine("0. 뒤로가기");
+
+                    int n = CheckValidInput(0, 0);
+
+                    switch (n)
                     {
-                        HealthPotion test = new HealthPotion();
-                        test.Use(player);
-                        Console.WriteLine("체력이 30 회복되었습니다.");
-                        Console.WriteLine("현재 체력: " + player.Hp);
-                        potionCount--;
+                        case 0:
+                            DisplayPotion();
+                            break;
                     }
+                }
 
-                    else
+                else
+                {
+                    Console.WriteLine("포션이 부족합니다.");
+                    Console.WriteLine();
+                    Console.WriteLine("0. 뒤로가기");
+
+                    int n = CheckValidInput(0, 0);
+
+                    switch (n)
                     {
-                        Console.WriteLine("포션이 부족합니다.");
+                        case 0:
+                            DisplayPotion();
+                            break;
                     }
-                    break;
-
-
-                case 0:
-                    DisplayGameIntro();
-                    break;
+                }
             }
 
 
