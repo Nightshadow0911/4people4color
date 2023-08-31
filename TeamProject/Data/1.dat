@@ -1,0 +1,12 @@
+{
+  "Name": "Rtan",
+  "Job": "마법사",
+  "Level": 1,
+  "Atk": 6,
+  "Def": 1,
+  "Hp": 60,
+  "Crit": 30.0,
+  "Evade": 5.0,
+  "Gold": 1500,
+  "Exp": 0
+}

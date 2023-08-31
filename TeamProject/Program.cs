@@ -11,8 +11,69 @@ namespace team
         private static int potionCount;
         private static List<Monster> monsters = new List<Monster>();
 
+        public static void Main()
+        {
+            GameDataSetting();
+            DisplayGameIntro();
+            GameDataSave();
+        }
+
         static void GameDataSetting() //캐릭터 항목
         {
+            DisplayGameStart();
+
+            // 인벤토리 생성
+            inventory = new Item[10];
+
+            // 아이템 추가
+            AddItem(new Item("무쇠갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 0, 5));
+            AddItem(new Item("낡은 검", "쉽게 볼 수 있는 낡은 검입니다.", 2, 0));
+
+            // 포션 갯수 추가
+            potionCount = 3;
+
+            // 몬스터 리스트
+            // List<Monster> 
+            monsters = new List<Monster>
+            {
+                new Monster("칼날부리", 1, 2, 30),
+                new Monster("돌골렘", 1, 2, 20),
+                new Monster("늑대", 1, 5, 20),
+                new Monster("미니언", 1, 3, 20)
+            };
+            // 번호 부여
+            for (int i = 0; i < monsters.Count; i++)
+            {
+                monsters[i].Number = i + 1;
+            }
+        }
+
+        static void DisplayGameStart()
+        {
+            Console.Clear();
+
+            Console.WriteLine("스파르타 마을에 오신 여러분 환영합니다.");
+            Console.WriteLine();
+            Console.WriteLine("1. 새로하기");
+            Console.WriteLine("2. 이어하기");
+
+            int input = CheckValidInput(1, 2);
+
+            switch (input)
+            {
+                case 1:
+                    DisplayCharacterCreate();
+                    break;
+                case 2:
+                    DisplayCharacterSelect();
+                    break;
+            }
+        }
+
+        static void DisplayCharacterCreate()
+        {
+            Console.Clear();
+
             Console.WriteLine("게임을 시작합니다.");
             Console.Write("캐릭터 이름을 입력하세요: ");
             string name = Console.ReadLine();
@@ -22,7 +83,7 @@ namespace team
 
             string job = "없음";
             int jobchoose = CheckValidInput(1, 4);
-            switch (jobchoose) //직업 고르기
+            switch (jobchoose)
             {
                 case 1:
                     job = "전사";
@@ -43,14 +104,13 @@ namespace team
 
             int Atk = 0, Def = 0, Hp = 0;
             float Crit = 0, Evade = 0;
-            int exp = 0, level = 1;
 
             Console.WriteLine("스탯을 결정해야 합니다.");
             Console.WriteLine("Enter키를 눌러 주사위를 굴려서 스탯을 정해주세요.");
             Console.ReadLine();
 
             bool reroll = true;
-            while (reroll) //랜덤하게 능력치 설정하기
+            while (reroll)
             {
                 Console.WriteLine("주사위를 굴립니다.");
                 Random random = new Random();
@@ -94,36 +154,59 @@ namespace team
 
 
                 // 캐릭터 정보 세팅
-                player = new Character(name, job, level, Atk, Def, Hp, Crit, Evade, 1500, exp);
             }
-
-            // 인벤토리 생성
-            inventory = new Item[10];
-
-            // 아이템 추가
-            AddItem(new Item("무쇠갑옷", "무쇠로 만들어져 튼튼한 갑옷입니다.", 0, 5));
-            AddItem(new Item("낡은 검", "쉽게 볼 수 있는 낡은 검입니다.", 2, 0));
-
-            // 포션 갯수 추가
-            potionCount = 3;
-
-            // 몬스터 리스트
-            // List<Monster> 
-            monsters = new List<Monster>
-            {
-                new Monster("칼날부리", 1, 2, 30),
-                new Monster("돌골렘", 1, 2, 20),
-                new Monster("늑대", 1, 5, 20),
-                new Monster("미니언", 1, 3, 20)
-            };
-            // 번호 부여
-            for (int i = 0; i < monsters.Count; i++)
-            {
-                monsters[i].Number = i + 1;
-            }
+            player = new Character(name, job, 1, Atk, Def, Hp, Crit, Evade, 1500, 0);
         }
 
-//endregion
+        static void DisplayCharacterSelect()
+        {
+            Console.Clear();
+
+            Console.WriteLine("캐릭터 선택");
+            Console.WriteLine("플레이할 저장소를 선택해주세요.");
+            List<CharacterData> list = GameManager.Instance().GetFileNameList();
+
+            if (list == null)
+            {
+                Console.Clear();
+                Console.WriteLine("저장된 데이터가 없습니다.");
+                Console.WriteLine("Enter키를 눌러 새로시작해주세요.");
+                Console.ReadLine();
+                DisplayCharacterCreate();
+                return;
+            }
+
+            for (int i = 1; i <= list.Count; i++)
+            {
+                if (i <= list.Count)
+                {
+                    Console.WriteLine(list[i - 1].ToString());
+                }
+                else
+                {
+                    Console.WriteLine(i + " |            |");
+                }
+            }
+
+            int input = CheckValidInput(1, list.Count);
+
+            player = list[input - 1].GetCharacter();
+            GameManager.Instance().SetIndex(input);
+        }
+
+        static void GameDataSave()
+        {
+            Console.Clear();
+
+            Console.WriteLine("게임을 종료하기전 저장합니다.");
+            Console.WriteLine("");
+
+            GameManager.Instance().SaveData(player);
+
+            Console.WriteLine("저장되었습니다.");
+        }
+
+        //endregion
 
         #region 아이템 관리
 
@@ -191,13 +274,16 @@ namespace team
             Console.WriteLine("1. 상태보기");
             Console.WriteLine("2. 인벤토리");
             Console.WriteLine("3. 던전 입장");                          // 추가
-            Console.WriteLine("4. 회복 아이템");
+            Console.WriteLine("4. 회복 아이템");                    // 추가
+            Console.WriteLine("0. 게임 종료");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-            int input = CheckValidInput(1, 3);
+            int input = CheckValidInput(0, 4);
             switch (input)
             {
+                case 0:
+                    return;
                 case 1:
                     DisplayMyInfo();
                     break;
@@ -545,19 +631,19 @@ namespace team
                         else
                         {
                             // 몬스터가 플레이어를 공격하는 부분
-                            int MonsterAttackDamage = targetInstance.Atk; 
-                            player.Hp -= MonsterAttackDamage; 
+                            int MonsterAttackDamage = targetInstance.Atk;
+                            player.Hp -= MonsterAttackDamage;
                             Console.WriteLine($"{targetInstance.Name}의 공격으로 플레이어가 {MonsterAttackDamage}만큼 피해를 입었습니다.");
                             Console.WriteLine($"플레이어의 남은 체력: {player.Hp}");
 
                             if (player.Hp <= 0)
                             {
                                 Console.WriteLine("플레이어가 쓰러졌습니다!");
-                               
+
                             }
                         }
 
-                        
+
                     }
 
                     // 데미지 얻은 몬스터 업데이트
@@ -573,7 +659,7 @@ namespace team
                         }
                     }
 
-                    
+
 
                     // 몬스터를 모두 해치우면
                     if (MonsterLife <= 0)
@@ -702,34 +788,6 @@ namespace team
             }
         }
 
-        public class Character
-        {
-            public string Name { get; }
-            public string Job { get; }
-            public int Level { get; set; }
-            public int Atk { get; set; }
-            public int Def { get; set; }
-            public int Hp { get; set; }
-            public float Crit { get; set; }
-            public float Evade { get; set; }
-            public int Gold { get; }
-            public int Exp { get; set; }
-
-            public Character(string name, string job, int level, int atk, int def, int hp, float crit, float evade, int gold, int exp)
-            {
-                Name = name;
-                Job = job;
-                Level = level;
-                Atk = atk;
-                Def = def;
-                Hp = hp;
-                Crit = crit;
-                Evade = evade;
-                Gold = gold;
-                Exp = exp;
-            }
-        }
-
         public class Item
         {
             public string Name { get; }
@@ -786,4 +844,4 @@ namespace team
 
 
     #endregion
-}   
+}

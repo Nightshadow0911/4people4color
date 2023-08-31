@@ -12,3 +12,11 @@ E:\Workspace\new\new\obj\Debug\net6.0\refint\new.dll
 E:\Workspace\new\new\obj\Debug\net6.0\new.pdb
 E:\Workspace\new\new\obj\Debug\net6.0\new.genruntimeconfig.cache
 E:\Workspace\new\new\obj\Debug\net6.0\ref\new.dll
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\obj\Debug\net6.0\new.csproj.AssemblyReference.cache
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\obj\Debug\net6.0\new.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\obj\Debug\net6.0\new.AssemblyInfoInputs.cache
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\obj\Debug\net6.0\new.AssemblyInfo.cs
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\obj\Debug\net6.0\new.csproj.CoreCompileInputs.cache
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\obj\Debug\net6.0\new.dll
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\obj\Debug\net6.0\refint\new.dll
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\obj\Debug\net6.0\new.pdb

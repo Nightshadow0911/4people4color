@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "A3FWXwjBvBe718w/jecj7UeflFPnz3iJeV15DnbVF+bDijFc1pdDBkqhvlPX0Vm3OPHFPUGHlwGPU5fbZQ2w0g==",
+  "dgSpecHash": "x7N2NtHKcE/bCbQGv1R85e3ZcRZ9fg7ZkNvIUTWkxl6lae6dK282IK7iroszDNnTRvW+flSm30iKONn9t1ZvrQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Administrator\\Downloads\\4people4color-charactermaking (1)\\4people4color-charactermaking\\TeamProject\\TeamProject.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\patt1\\Desktop\\work\\C#\\비둘기\\4people4color\\TeamProject\\TeamProject.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\patt1\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

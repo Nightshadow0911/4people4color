@@ -9,3 +9,20 @@ C:\Users\Administrator\Downloads\4people4color-charactermaking (1)\4people4color
 C:\Users\Administrator\Downloads\4people4color-charactermaking (1)\4people4color-charactermaking\TeamProject\obj\Debug\net6.0\TeamProject.dll
 C:\Users\Administrator\Downloads\4people4color-charactermaking (1)\4people4color-charactermaking\TeamProject\obj\Debug\net6.0\refint\TeamProject.dll
 C:\Users\Administrator\Downloads\4people4color-charactermaking (1)\4people4color-charactermaking\TeamProject\obj\Debug\net6.0\TeamProject.pdb
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.csproj.AssemblyReference.cache
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.AssemblyInfoInputs.cache
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.AssemblyInfo.cs
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.csproj.CoreCompileInputs.cache
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.dll
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\obj\Debug\net6.0\refint\TeamProject.dll
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.pdb
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\bin\Debug\net6.0\TeamProject.exe
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\bin\Debug\net6.0\TeamProject.deps.json
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\bin\Debug\net6.0\TeamProject.runtimeconfig.json
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\bin\Debug\net6.0\TeamProject.dll
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\bin\Debug\net6.0\TeamProject.pdb
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.csproj.CopyComplete
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\obj\Debug\net6.0\TeamProject.genruntimeconfig.cache
+C:\Users\patt1\Desktop\work\C#\비둘기\4people4color\TeamProject\obj\Debug\net6.0\ref\TeamProject.dll

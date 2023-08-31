@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using Newtonsoft.Json;
 
 public class GameManager
@@ -26,7 +23,10 @@ public class GameManager
 
     public List<CharacterData> GetFileNameList()
     {
-        System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(FolderName);
+        DirectoryInfo di = new DirectoryInfo(FolderName);
+
+        if (!di.Exists)
+            return null;
 
         List<CharacterData> list = new List<CharacterData>();
         foreach (System.IO.FileInfo File in di.GetFiles())
@@ -52,7 +52,12 @@ public class GameManager
     }
     public void SaveData(Character player)
     {
+        if (!Directory.Exists(FolderName))
+            Directory.CreateDirectory(FolderName);
+
         using (StreamWriter writer = new StreamWriter("Data/" + (Index == 0 ? GetFileNameList().Count + 1 : Index) + ".dat"))
             writer.Write(JsonConvert.SerializeObject(player, Formatting.Indented));
+
+
     }
 }

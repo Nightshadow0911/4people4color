@@ -1,0 +1,12 @@
+{
+  "Name": "Rtan2",
+  "Job": "전사",
+  "Level": 1,
+  "Atk": 11,
+  "Def": 9,
+  "Hp": 113,
+  "Crit": 5.0,
+  "Evade": 5.0,
+  "Gold": 1500,
+  "Exp": 0
+}
