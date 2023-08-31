@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Workspace\\4people4color-main\\TeamProject\\TeamProject.csproj",
+      "projectUniqueName": "C:\\Users\\Administrator\\Downloads\\4people4color-charactermaking\\4people4color-charactermaking\\TeamProject\\TeamProject.csproj",
       "projectName": "TeamProject",
-      "projectPath": "E:\\Workspace\\4people4color-main\\TeamProject\\TeamProject.csproj",
+      "projectPath": "C:\\Users\\Administrator\\Downloads\\4people4color-charactermaking\\4people4color-charactermaking\\TeamProject\\TeamProject.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\Workspace\\4people4color-main\\TeamProject\\obj\\",
+      "outputPath": "C:\\Users\\Administrator\\Downloads\\4people4color-charactermaking\\4people4color-charactermaking\\TeamProject\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
