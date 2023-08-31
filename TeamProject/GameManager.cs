@@ -6,7 +6,9 @@ using Newtonsoft.Json;
 public class GameManager
 {
     private static GameManager instance;
+    private int Index = 0;
     string FolderName = "Data";
+
 
     public static GameManager Instance()
     {
@@ -15,6 +17,11 @@ public class GameManager
             instance = new GameManager();
         }
         return instance;
+    }
+
+    public void SetIndex(int index)
+    {
+        Index = index;
     }
 
     public List<CharacterData> GetFileNameList()
@@ -35,7 +42,7 @@ public class GameManager
         }
         return list;
     }
-    public Character LoadData(int index)
+    private Character LoadData(int index)
     {
         string filePath = FolderName + "/" + index + ".dat";
 
@@ -43,9 +50,9 @@ public class GameManager
             return JsonConvert.DeserializeObject<Character>(reader.ReadToEnd());
 
     }
-    public void SaveData(int index, Character player)
+    public void SaveData(Character player)
     {
-        using (StreamWriter writer = new StreamWriter("Data/" + index + "_" + player.Name + ".dat"))
+        using (StreamWriter writer = new StreamWriter("Data/" + (Index == 0 ? GetFileNameList().Count + 1 : Index) + ".dat"))
             writer.Write(JsonConvert.SerializeObject(player, Formatting.Indented));
     }
 }
