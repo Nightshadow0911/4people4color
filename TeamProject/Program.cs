@@ -49,7 +49,10 @@ namespace team
                     break;
             }
 
-            Console.WriteLine("스탯을 결정해야 합니다.");  //직업에 따라 스탯에 차별을 줄 예정, MP, 회피, 치명타 등 스탯 추가 예정.
+            int Atk = 0, Def = 0, Hp = 0;
+            float Crit = 0, Evade = 0;
+
+            Console.WriteLine("스탯을 결정해야 합니다.");
             Console.WriteLine("Enter키를 눌러 주사위를 굴려서 스탯을 정해주세요.");
             Console.ReadLine();
 
@@ -58,17 +61,47 @@ namespace team
             {
                 Console.WriteLine("주사위를 굴립니다.");
                 Random random = new Random();
-                int Atk = random.Next(5, 15);
-                int Def = random.Next(3, 8);
-                int Hp = random.Next(80, 120);
+                if (job == "전사")
+                {
+                    Atk = random.Next(5, 12);
+                    Def = random.Next(5, 10);
+                    Hp = random.Next(100, 150);
+                    Crit = 5;
+                    Evade = 5;
+                }
+                else if (job == "마법사")
+                {
+                    Atk = random.Next(5, 15);
+                    Def = random.Next(1, 3);
+                    Hp = random.Next(60, 100);
+                    Crit = 30;
+                    Evade = 5;
+                }
+                else if (job == "궁수")
+                {
+                    Atk = random.Next(5, 10);
+                    Def = random.Next(3, 7);
+                    Hp = random.Next(100, 120);
+                    Crit = 10;
+                    Evade = 10;
+                }
+                else if (job == "도적")
+                {
+                    Atk = random.Next(3, 8);
+                    Def = random.Next(3, 5);
+                    Hp = random.Next(80, 100);
+                    Crit = 30;
+                    Evade = 30;
+                }
 
                 Console.WriteLine($"공격력: {Atk} | 방어력: {Def} | 체력: {Hp}");
 
                 Console.Write("주사위를 다시 굴리려면 Y를 입력하세요. 다음으로 넘어가려면 다른 키를 입력하세요: ");
                 reroll = Console.ReadLine().ToUpper() == "Y";
+            
 
-                // 캐릭터 정보 세팅
-                player = new Character(name, job, 1, Atk, Def, Hp, 1500);
+            // 캐릭터 정보 세팅
+            player = new Character(name, job, 1, Atk, Def, Hp, Crit, Evade, 1500);
             }
 
             // 인벤토리 생성
@@ -90,6 +123,7 @@ namespace team
                 new Monster("늑대", 1, 5, 20),
                 new Monster("미니언", 1, 3, 20)
             };
+
             // 번호 부여
             for (int i = 0; i < monsters.Count; i++)
             {
@@ -169,7 +203,7 @@ namespace team
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-            int input = CheckValidInput(1, 3);
+            int input = CheckValidInput(1, 4);
             switch (input)
             {
                 case 1:
@@ -211,8 +245,9 @@ namespace team
             if (itemDef != 0)
                 Console.Write($"(+{itemDef})");
             Console.WriteLine();
-
             Console.WriteLine($"체력 : {player.Hp}");
+            Console.WriteLine($"크리티컬: {player.Crit}%");
+            Console.WriteLine($"회피: {player.Evade}%");
             Console.WriteLine($"Gold : {player.Gold} G");
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
@@ -585,13 +620,15 @@ namespace team
         {
             public string Name { get; }
             public string Job { get; }
-            public int Level { get; }
-            public int Atk { get; }
-            public int Def { get; }
+            public int Level { get; set; }
+            public int Atk { get; set; }
+            public int Def { get; set; }
             public int Hp { get; set; }
+            public float Crit { get; set; }
+            public float Evade { get; set; }
             public int Gold { get; }
 
-            public Character(string name, string job, int level, int atk, int def, int hp, int gold)
+            public Character(string name, string job, int level, int atk, int def, int hp, float crit, float evade, int gold)
             {
                 Name = name;
                 Job = job;
@@ -599,6 +636,8 @@ namespace team
                 Atk = atk;
                 Def = def;
                 Hp = hp;
+                Crit = crit;
+                Evade = evade;
                 Gold = gold;
             }
         }
@@ -631,8 +670,11 @@ namespace team
             public int Number { get; set; }
             public string Name { get; }
             public int Level { get; }
-            public int Atk { get; set; }
-            public int Hp { get; set; }
+            public int Atk { get; }
+            public int Hp { get; }
+            public int Crit { get; set; }
+            public int Evade { get; set; }
+
 
             // monster 죽일 시, 골드 및 경험치
             // public int Gold { get; }
