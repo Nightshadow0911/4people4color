@@ -11,15 +11,7 @@ namespace team
         private static int potionCount;
         private static List<Monster> monsters = new List<Monster>();
 
-        static void Main(string[] args)
-        {
-            GameDataSetting();
-            DisplayGameIntro();
-        }
-
-        #region 초기화
-
-        static void GameDataSetting()
+        static void GameDataSetting() //캐릭터 항목
         {
             Console.WriteLine("게임을 시작합니다.");
             Console.Write("캐릭터 이름을 입력하세요: ");
@@ -30,7 +22,7 @@ namespace team
 
             string job = "없음";
             int jobchoose = CheckValidInput(1, 4);
-            switch (jobchoose)
+            switch (jobchoose) //직업 고르기
             {
                 case 1:
                     job = "전사";
@@ -57,7 +49,7 @@ namespace team
             Console.ReadLine();
 
             bool reroll = true;
-            while (reroll)
+            while (reroll) //랜덤하게 능력치 설정하기
             {
                 Console.WriteLine("주사위를 굴립니다.");
                 Random random = new Random();
@@ -98,10 +90,10 @@ namespace team
 
                 Console.Write("주사위를 다시 굴리려면 Y를 입력하세요. 다음으로 넘어가려면 다른 키를 입력하세요: ");
                 reroll = Console.ReadLine().ToUpper() == "Y";
-            
 
-            // 캐릭터 정보 세팅
-            player = new Character(name, job, 1, Atk, Def, Hp, Crit, Evade, 1500);
+
+                // 캐릭터 정보 세팅
+                player = new Character(name, job, 1, Atk, Def, Hp, Crit, Evade, 1500);
             }
 
             // 인벤토리 생성
@@ -123,7 +115,6 @@ namespace team
                 new Monster("늑대", 1, 5, 20),
                 new Monster("미니언", 1, 3, 20)
             };
-
             // 번호 부여
             for (int i = 0; i < monsters.Count; i++)
             {
@@ -131,7 +122,7 @@ namespace team
             }
         }
 
-        #endregion
+//endregion
 
         #region 아이템 관리
 
@@ -203,7 +194,7 @@ namespace team
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
-            int input = CheckValidInput(1, 4);
+            int input = CheckValidInput(1, 3);
             switch (input)
             {
                 case 1:
@@ -523,8 +514,22 @@ namespace team
                             isMonsterAlive[targetIndex] = false;        // false 값 처리
                             MonsterLife--;                              // 몬스터 수 처리
                         }
+                        else
+                        {
+                            // 몬스터가 플레이어를 공격하는 부분
+                            int MonsterAttackDamage = targetInstance.Atk; 
+                            player.Hp -= MonsterAttackDamage; 
+                            Console.WriteLine($"{targetInstance.Name}의 공격으로 플레이어가 {MonsterAttackDamage}만큼 피해를 입었습니다.");
+                            Console.WriteLine($"플레이어의 남은 체력: {player.Hp}");
 
-                        // 플레이어 공격 위치??????
+                            if (player.Hp <= 0)
+                            {
+                                Console.WriteLine("플레이어가 쓰러졌습니다!");
+                               
+                            }
+                        }
+
+                        
                     }
 
                     // 데미지 얻은 몬스터 업데이트
@@ -540,7 +545,7 @@ namespace team
                         }
                     }
 
-                    // 플레이어 공격 위치??????
+                    
 
                     // 몬스터를 모두 해치우면
                     if (MonsterLife <= 0)
@@ -670,11 +675,8 @@ namespace team
             public int Number { get; set; }
             public string Name { get; }
             public int Level { get; }
-            public int Atk { get; }
-            public int Hp { get; }
-            public int Crit { get; set; }
-            public int Evade { get; set; }
-
+            public int Atk { get; set; }
+            public int Hp { get; set; }
 
             // monster 죽일 시, 골드 및 경험치
             // public int Gold { get; }
