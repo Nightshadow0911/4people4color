@@ -43,6 +43,7 @@ namespace team
 
             int Atk = 0, Def = 0, Hp = 0;
             float Crit = 0, Evade = 0;
+            int exp = 0, level = 1;
 
             Console.WriteLine("스탯을 결정해야 합니다.");
             Console.WriteLine("Enter키를 눌러 주사위를 굴려서 스탯을 정해주세요.");
@@ -93,7 +94,7 @@ namespace team
 
 
                 // 캐릭터 정보 세팅
-                player = new Character(name, job, 1, Atk, Def, Hp, Crit, Evade, 1500);
+                player = new Character(name, job, level, Atk, Def, Hp, Crit, Evade, 1500, exp);
             }
 
             // 인벤토리 생성
@@ -552,9 +553,9 @@ namespace team
                     {
                         Console.WriteLine("");
                         Console.WriteLine("플레이어 승리!");
-                        Console.WriteLine("키를 누르면, 되돌아갑니다.");
+                        Console.WriteLine("키를 누르면, 결과창으로 갑니다.");
                         Console.ReadKey();
-                        DisplayGameIntro();
+                        DisplayResult();
                         break;
                     }
                 }
@@ -567,6 +568,59 @@ namespace team
                 DisplayGameIntro();
             }
 
+        }
+
+        static void DisplayResult()
+        {
+            Console.Clear();
+            Console.WriteLine("Battle!! - Result");
+            Console.WriteLine();
+            Console.WriteLine("Victory");
+            Console.WriteLine();
+            Console.WriteLine("던전에서 모든 몬스터를 잡았습니다.");
+            Console.WriteLine();
+            Console.WriteLine("[캐릭터 정보]");
+            Console.WriteLine($"Lv.{player.Level} {player.Name}");
+            Console.WriteLine($"Hp : 100  ->" + $"{player.Hp}");  // 데미지 받은만큼 빼기
+            // player 변수에 exp 추가 
+            Console.WriteLine($"exp : {player.Exp}");
+
+            /*
+            if (player.Exp >= 10 && player.Exp < 35)
+            {
+                player.Level = 2;
+            }
+            else if (player.Exp >= 35 && player.Exp < 65)
+            {
+                player.Level = 3;
+            }
+            else if (player.Exp >= 65 && player.Exp < 100)
+            {
+                player.Level = 4;
+            }
+            else if (player.Exp >= 100)
+            {
+                player.Level = 5;
+            }
+            else
+            {
+                Console.WriteLine(player.Level);
+            }
+            */
+
+            Console.WriteLine();
+            Console.WriteLine("[획득 아이템]");
+            Console.WriteLine("회복 포션");
+            potionCount++;
+
+            Console.WriteLine("0. 나가기");
+            int input = CheckValidInput(0, 0);
+            switch (input)
+            {
+                case 0:
+                    DisplayGameIntro();
+                    break;
+            }
         }
         #endregion
 
@@ -632,8 +686,9 @@ namespace team
             public float Crit { get; set; }
             public float Evade { get; set; }
             public int Gold { get; }
+            public int Exp { get; set; }
 
-            public Character(string name, string job, int level, int atk, int def, int hp, float crit, float evade, int gold)
+            public Character(string name, string job, int level, int atk, int def, int hp, float crit, float evade, int gold, int exp)
             {
                 Name = name;
                 Job = job;
@@ -644,6 +699,7 @@ namespace team
                 Crit = crit;
                 Evade = evade;
                 Gold = gold;
+                Exp = exp;
             }
         }
 
