@@ -1,0 +1,14 @@
+E:\Workspace\4people4color-main\TeamProject\obj\Debug\net6.0\TeamProject.GeneratedMSBuildEditorConfig.editorconfig
+E:\Workspace\4people4color-main\TeamProject\obj\Debug\net6.0\TeamProject.AssemblyInfoInputs.cache
+E:\Workspace\4people4color-main\TeamProject\obj\Debug\net6.0\TeamProject.AssemblyInfo.cs
+E:\Workspace\4people4color-main\TeamProject\obj\Debug\net6.0\TeamProject.csproj.CoreCompileInputs.cache
+E:\Workspace\4people4color-main\TeamProject\bin\Debug\net6.0\TeamProject.exe
+E:\Workspace\4people4color-main\TeamProject\bin\Debug\net6.0\TeamProject.deps.json
+E:\Workspace\4people4color-main\TeamProject\bin\Debug\net6.0\TeamProject.runtimeconfig.json
+E:\Workspace\4people4color-main\TeamProject\bin\Debug\net6.0\TeamProject.dll
+E:\Workspace\4people4color-main\TeamProject\bin\Debug\net6.0\TeamProject.pdb
+E:\Workspace\4people4color-main\TeamProject\obj\Debug\net6.0\TeamProject.dll
+E:\Workspace\4people4color-main\TeamProject\obj\Debug\net6.0\refint\TeamProject.dll
+E:\Workspace\4people4color-main\TeamProject\obj\Debug\net6.0\TeamProject.pdb
+E:\Workspace\4people4color-main\TeamProject\obj\Debug\net6.0\TeamProject.genruntimeconfig.cache
+E:\Workspace\4people4color-main\TeamProject\obj\Debug\net6.0\ref\TeamProject.dll
