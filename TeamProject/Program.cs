@@ -499,14 +499,41 @@ namespace team
 
                     // 깨끗하게 지워주기
                     Console.Clear();
+                    int CalculateDamage(int attackerAtk, int defenderDef) //데미지 계산식
+                    {
+                        int damage = attackerAtk - defenderDef;
+
+                        // 크리티컬 확률 적용
+                        if (random.Next(100) < player.Crit)
+                        {
+                            Console.WriteLine("크리티컬 공격!");
+                            damage *= 2;
+                        }
+
+                        return damage;
+                    }
 
                     if (targetInstance.Hp > 0)       // 선택한 몬스터가 살아있으면
                     {
-                        int MonsterDamage = player.Atk + itemAtk;
-                        targetInstance.Hp -= MonsterDamage;       // 플레이어 공격력 적용
+                        bool CanEvade(float evade)
+                        {
+                            return random.Next(100) < evade;
+                        }
+
+                        int MonsterDamage = CalculateDamage(player.Atk + itemAtk, targetInstance.Def);
+
+                        if (CanEvade(targetInstance.Evade))
+                        {
+                            Console.WriteLine($"{targetInstance.Name}의 공격을 회피했습니다!");
+                        }
+                        else
+                        {
+                            targetInstance.Hp -= MonsterDamage; // 플레이어 공격력 적용
+                        }
                         Console.WriteLine();
                         Console.WriteLine($"{targetInstance.Name}에게 데미지를 입혔습니다!");
                         Console.WriteLine();
+
                         if (targetInstance.Hp <= 0)
                         {
                             Console.WriteLine($"{targetInstance.Name} 잡았다!");
@@ -733,6 +760,9 @@ namespace team
             public int Level { get; }
             public int Atk { get; set; }
             public int Hp { get; set; }
+            public float Crit { get; set; }
+            public float Evade { get; set; }
+            public int Def { get; internal set; }
 
             // monster 죽일 시, 골드 및 경험치
             // public int Gold { get; }

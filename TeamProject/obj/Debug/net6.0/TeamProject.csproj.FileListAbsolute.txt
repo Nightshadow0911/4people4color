@@ -2,3 +2,10 @@ C:\Users\Administrator\Downloads\4people4color-monster2\4people4color-monster2\T
 C:\Users\Administrator\Downloads\4people4color-monster2\4people4color-monster2\TeamProject\obj\Debug\net6.0\TeamProject.AssemblyInfoInputs.cache
 C:\Users\Administrator\Downloads\4people4color-monster2\4people4color-monster2\TeamProject\obj\Debug\net6.0\TeamProject.AssemblyInfo.cs
 C:\Users\Administrator\Downloads\4people4color-monster2\4people4color-monster2\TeamProject\obj\Debug\net6.0\TeamProject.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\4people4color-charactermaking (1)\4people4color-charactermaking\TeamProject\obj\Debug\net6.0\TeamProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Downloads\4people4color-charactermaking (1)\4people4color-charactermaking\TeamProject\obj\Debug\net6.0\TeamProject.AssemblyInfoInputs.cache
+C:\Users\Administrator\Downloads\4people4color-charactermaking (1)\4people4color-charactermaking\TeamProject\obj\Debug\net6.0\TeamProject.AssemblyInfo.cs
+C:\Users\Administrator\Downloads\4people4color-charactermaking (1)\4people4color-charactermaking\TeamProject\obj\Debug\net6.0\TeamProject.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Downloads\4people4color-charactermaking (1)\4people4color-charactermaking\TeamProject\obj\Debug\net6.0\TeamProject.dll
+C:\Users\Administrator\Downloads\4people4color-charactermaking (1)\4people4color-charactermaking\TeamProject\obj\Debug\net6.0\refint\TeamProject.dll
+C:\Users\Administrator\Downloads\4people4color-charactermaking (1)\4people4color-charactermaking\TeamProject\obj\Debug\net6.0\TeamProject.pdb
