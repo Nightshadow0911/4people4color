@@ -380,30 +380,49 @@ namespace team
             Console.WriteLine("원하시는 행동을 입력해주세요.");
 
             int input = CheckValidInput(0, 1);
-            switch (input)
+
+            if (input == 0)
             {
-                // 체력회복이 된 이후에 다시 DisplayPotion 으로 나갈 수 있도록 구현해야함.
+                DisplayGameIntro();
+            }
 
-                case 1:
-                    if (potionCount > 0)
+            if (input == 1)
+            {
+                if (potionCount > 0)
+                {
+                    HealthPotion test = new HealthPotion();
+                    test.Use(player);
+                    Console.WriteLine("체력이 30 회복되었습니다.");
+                    Console.WriteLine("현재 체력: " + player.Hp);
+                    potionCount--;
+                    Console.WriteLine();
+                    Console.WriteLine("0. 뒤로가기");
+
+                    int n = CheckValidInput(0, 0);
+
+                    switch (n)
                     {
-                        HealthPotion test = new HealthPotion();
-                        test.Use(player);
-                        Console.WriteLine("체력이 30 회복되었습니다.");
-                        Console.WriteLine("현재 체력: " + player.Hp);
-                        potionCount--;
+                        case 0:
+                            DisplayPotion();
+                            break;
                     }
+                }
 
-                    else
+                else
+                {
+                    Console.WriteLine("포션이 부족합니다.");
+                    Console.WriteLine();
+                    Console.WriteLine("0. 뒤로가기");
+
+                    int n = CheckValidInput(0, 0);
+
+                    switch (n)
                     {
-                        Console.WriteLine("포션이 부족합니다.");
+                        case 0:
+                            DisplayPotion();
+                            break;
                     }
-                    break;
-
-
-                case 0:
-                    DisplayGameIntro();
-                    break;
+                }
             }
 
 
@@ -415,7 +434,7 @@ namespace team
         {
             Console.Clear();
             Random random = new Random();
-
+            // 던전에 몬스터가 있으면
             if (monsters.Count > 0)
             {
                 int numMonsters = random.Next(1, 5); // 1~4마리 랜덤으로 설정
@@ -437,36 +456,103 @@ namespace team
                 }
 
                 // 게임 전투 구현
+                //-------------------------------------------------------------------------------------------------------------------------------------------------------------- 수정 할 부분 나눔
+
+                int MonsterLife = numMonsters;                                  // 살아있는 몬스터 수를 변수 새로 지정
+
+                List<Monster> monsterInstances = new List<Monster>();           // 마주친 몬스터 중 살아있는 몬스터 List
+
+                foreach (var encounteredMonster in encounteredMonsters)         // 마주친 몬스터들을 차례로 불러오기
+                {
+                    Monster newMonster = new Monster(encounteredMonster.Name, encounteredMonster.Level, encounteredMonster.Atk, encounteredMonster.Hp); // 몬스터 복사 생성
+                    monsterInstances.Add(newMonster);
+                }
+
+                List<bool> isMonsterAlive = Enumerable.Repeat(true, monsterInstances.Count).ToList();       // true의 값을 살아있는 몬스터 수 만큼 반복해서, 리스트에 넣기 (어려운 함수)
+
+                // 몬스터가 남아있으면 실행
+                while (MonsterLife > 0)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("공격할 대상을 입력해주세요!!     (0. 도망가기)");
+
+                    Console.Write(" :   ");
 
 
-                Console.WriteLine();
-                Console.WriteLine("공격할 대상을 입력해주세요!!");
-                Console.Write(" :   ");
+                    // 도망가기(게임 인트로로)
+                    int input = CheckValidInput(0, numMonsters);
+                    switch (input)
+                    {
+                        case 0:
+                            DisplayGameIntro();
+                            break;
+                    }
 
 
-                int input = CheckValidInput(1, numMonsters);
-                Monster targetMonster = encounteredMonsters[input - 1]; // 선택한 몬스터
+                    // 몬스터 등장
 
-                Console.WriteLine();
-                Console.WriteLine($"{targetMonster.Name}을(를) 공격합니다!");
-                Console.WriteLine();
+                    Monster targetInstance = monsterInstances[input - 1]; // 선택한 몬스터
+                    int targetIndex = monsterInstances.IndexOf(targetInstance);
+                    Console.WriteLine();
+                    Console.WriteLine($"{targetInstance.Name}을(를) 공격합니다!");
+                    Console.WriteLine();
+                    int itemAtk = GetItemAtkAmount();           // 플레이어 공격력 불러오기
 
-                //switch (input)
-                //{
-                //    case 1:
-                //        // 몬스터 1  선택
-                //        break;
+                    // flase 값을 불러와 맞으면 출력
+                    if (!isMonsterAlive[targetIndex])
+                    {
+                        Console.WriteLine("이미 죽은 몬스터입니다. 다른 몬스터를 선택하세요.");
+                        continue;
+                    }
 
-                //    case 2:
-                //        // 몬스터 2  선택
-                //        break;
-                //    case 3:
-                //        // 몬스터 3  선택
-                //        break;
-                //    case 4:
-                //        // 몬스터 4  선택
-                //        break;
-                //}
+                    // 깨끗하게 지워주기
+                    Console.Clear();
+
+                    if (targetInstance.Hp > 0)       // 선택한 몬스터가 살아있으면
+                    {
+                        int MonsterDamage = player.Atk + itemAtk;
+                        targetInstance.Hp -= MonsterDamage;       // 플레이어 공격력 적용
+                        Console.WriteLine();
+                        Console.WriteLine($"{targetInstance.Name}에게 데미지를 입혔습니다!");
+                        Console.WriteLine();
+                        if (targetInstance.Hp <= 0)
+                        {
+                            Console.WriteLine($"{targetInstance.Name} 잡았다!");
+                            Console.WriteLine();
+
+                            isMonsterAlive[targetIndex] = false;        // false 값 처리
+                            MonsterLife--;                              // 몬스터 수 처리
+                        }
+
+                        // 플레이어 공격 위치??????
+                    }
+
+                    // 데미지 얻은 몬스터 업데이트
+                    for (int j = 0; j < monsterInstances.Count; j++)
+                    {
+                        // 살아 있는 몬스터를 남은 몬스터로 지정(새 변수)
+                        Monster remainingMonster = monsterInstances[j];
+
+                        // True의 값
+                        if (isMonsterAlive[j])
+                        {
+                            Console.WriteLine($"{j + 1}. LV{remainingMonster.Level}. {remainingMonster.Name} (공격력: {remainingMonster.Atk}, HP: {remainingMonster.Hp})");
+                        }
+                    }
+
+                    // 플레이어 공격 위치??????
+
+                    // 몬스터를 모두 해치우면
+                    if (MonsterLife <= 0)
+                    {
+                        Console.WriteLine("");
+                        Console.WriteLine("플레이어 승리!");
+                        Console.WriteLine("키를 누르면, 되돌아갑니다.");
+                        Console.ReadKey();
+                        DisplayGameIntro();
+                        break;
+                    }
+                }
 
             }
             else
@@ -588,6 +674,7 @@ namespace team
             public int Hp { get; }
             public int Crit { get; set; }
             public int Evade { get; set; }
+
 
             // monster 죽일 시, 골드 및 경험치
             // public int Gold { get; }
