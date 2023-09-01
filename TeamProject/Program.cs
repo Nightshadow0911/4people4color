@@ -327,6 +327,7 @@ namespace team
             Console.WriteLine($"크리티컬: {player.Crit}%");
             Console.WriteLine($"회피: {player.Evade}%");
             Console.WriteLine($"Gold : {player.Gold} G");
+            Console.WriteLine($"exp : {player.Exp}");
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
 
@@ -623,6 +624,7 @@ namespace team
                         if (targetInstance.Hp <= 0)
                         {
                             Console.WriteLine($"{targetInstance.Name} 잡았다!");
+                            player.Exp += 3;
                             Console.WriteLine();
 
                             isMonsterAlive[targetIndex] = false;        // false 값 처리
@@ -693,12 +695,6 @@ namespace team
             Console.WriteLine("던전에서 모든 몬스터를 잡았습니다.");
             Console.WriteLine();
             Console.WriteLine("[캐릭터 정보]");
-            Console.WriteLine($"Lv.{player.Level} {player.Name}");
-            Console.WriteLine($"Hp : 100  ->" + $"{player.Hp}");  // 데미지 받은만큼 빼기
-            // player 변수에 exp 추가 
-            Console.WriteLine($"exp : {player.Exp}");
-
-            /*
             if (player.Exp >= 10 && player.Exp < 35)
             {
                 player.Level = 2;
@@ -715,12 +711,9 @@ namespace team
             {
                 player.Level = 5;
             }
-            else
-            {
-                Console.WriteLine(player.Level);
-            }
-            */
-
+            Console.WriteLine($"Lv.{player.Level} {player.Name}");
+            Console.WriteLine($"{player.Hp}");
+            Console.WriteLine($"exp : {player.Exp}");
             Console.WriteLine();
             Console.WriteLine("[획득 아이템]");
             Console.WriteLine("회복 포션");
