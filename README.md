@@ -41,9 +41,9 @@
   - DisplayCharacterCreate에서 능력치 중에 치명타와 회피 확률이 있으며, DisplayDungeon에 CaclculateDamage에서 플레이어의 공격력에서 몬스터의 방어력을 뺀 값을 if (random.Next(100) < player.Crit)을 통해 확률이 발동하면 치명타가 터지게 되고 회피 기능 또한 CanEvade에서
   - ```
     bool CanEvade(float evade)
-{
-    return random.Next(100) < evade;
-}
+    {
+      return random.Next(100) < evade;
+    }
 을 통해 회피할 수 있습니다.
 - 레벨업 기능
 - 보상 추가
