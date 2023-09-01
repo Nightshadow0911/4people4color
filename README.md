@@ -54,3 +54,4 @@
 - 게임 저장하기
   - 캐릭터의 데이터를 Json형식으로 변환하여 저장하고 게임을 다시 시작했을 때 불러올수 있습니다.
   - https://github.com/Nightshadow0911/4people4color/blob/696175989da74f64c15fe99a5ca87b2f330a1957/TeamProject/GameManager.cs#L53-L62
+  - https://github.com/Nightshadow0911/4people4color/blob/41bba424772c80af49ed2a3512a9213e113f1787/TeamProject/GameManager.cs#L45-L52
