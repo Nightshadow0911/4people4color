@@ -33,12 +33,12 @@
 선택 요구 사항
 * 캐릭터 생성 기능
 * 직업 선택 기능
-** DisplayCharacterCreate에서 직업을 선택할 수 있습니다.
+  DisplayCharacterCreate에서 직업을 선택할 수 있습니다.
   직업을 4종류 중 하나를 고르면 스탯을 정하는 기능으로 넘어가는데 각 직업에 따라 능력치 폭이 다르도록 설정되어 있어 원하는 스탯을 정할때까지 재시도할 수 있습니다.
   
 - 치명타 기능
 - 회피 기능
-  -DisplayCharacterCreate에서 능력치 중에 치명타와 회피 확률이 있으며, DisplayDungeon에 CaclculateDamage에서 플레이어의 공격력에서 몬스터의 방어력을 뺀 값을
+  DisplayCharacterCreate에서 능력치 중에 치명타와 회피 확률이 있으며, DisplayDungeon에 CaclculateDamage에서 플레이어의 공격력에서 몬스터의 방어력을 뺀 값을
   if (random.Next(100) < player.Crit)을 통해 확률이 발동하면 치명타가 터지게 되고
   회피 기능 또한 CanEvade에서]
   bool CanEvade(float evade)
